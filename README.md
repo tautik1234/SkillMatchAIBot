@@ -87,7 +87,6 @@ SkillMatchAIBot/
 ├── .env.example                                  # Template for environment variables
 ├── .gitignore                                    # Git ignore rules (node_modules, venv, .env)
 ├── README.md                                     # Project documentation
-├── SKILLMATCH_BACKEND_INTERVIEW_MASTER_GUIDE.md # 9 LPA backend architecture & interview guide
 ├── agent_api.py                                  # Flask AI Microservice (Groq LLaMA 3.3)
 ├── requirements.txt                              # Python package dependencies
 ├── test.py                                       # CLI streaming test script for Groq
@@ -277,19 +276,12 @@ python test.py
 
 ---
 
-## 🎓 Technical Interview & Architecture Guide
+## 💡 Core Design Decisions & Engineering Highlights
 
-Looking to understand the architectural design patterns, trade-offs, and scaling strategies behind this system for high-stakes technical interviews?
-
-Check out our comprehensive in-repo guide:  
-👉 **[SKILLMATCH_BACKEND_INTERVIEW_MASTER_GUIDE.md](file:///e:/GitHub_Clones/SkillMatchAIBot/SKILLMATCH_BACKEND_INTERVIEW_MASTER_GUIDE.md)**
-
-Topics covered:
-- **Architectural Topology & Two-Tier Polyglot Microservices Pattern**
-- **Inter-service Communication & Failure Mode Isolation**
-- **Statelessness, Horizontal Scaling, & Concurrency Models**
-- **LLM Guardrails, System Prompt Hardening, & Token Optimization**
-- **20+ High-Frequency 9 LPA System Design & Backend Interview Q&As**
+- **BFF (Backend-For-Frontend) Pattern**: Express acts as an edge proxy isolating client requests from internal microservice APIs and LLM secrets.
+- **Polyglot Microservices**: Combines Node.js (high-concurrency routing and lightweight proxying) with Python (native ecosystem for AI/ML inference).
+- **Stateless Agent Design**: The Python Flask service maintains zero conversational state in memory; conversation history is passed through authenticated payloads, ensuring horizontal scalability.
+- **Prompt Hardening**: Strict boundary conditions protect against jailbreaks, off-topic hallucinations, and unnecessary token burn.
 
 ---
 
